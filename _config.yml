@@ -4,5 +4,8 @@ theme: just-the-docs
 
 url: https://just-the-docs.github.io
 
+# Ensure consistent navigation ordering
+nav_sort: case_insensitive
+
 aux_links:
   Template Repository: https://github.com/just-the-docs/just-the-docs-template
