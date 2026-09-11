@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Raspberry Pi Pico SDK with VS2026
-parent: Visual Studio
+parent: Raspberry Pi Pico
 nav_order: 3
 ---
 
