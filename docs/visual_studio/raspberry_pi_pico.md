@@ -7,6 +7,14 @@ nav_order: 3
 
 # Building the Raspberry Pi Pico SDK with VS2026
 
+## Download and/or build the dependency binaries
+
+{: .important }
+> The Pico SDK expects some executables to be available.
+> These can either be built seperately, or pre-built binaries can
+> be downloaded from https://github.com/raspberrypi/pico-sdk-tools
+
+
 ## Download and build PICOTOOL
 TODO
 TODO
