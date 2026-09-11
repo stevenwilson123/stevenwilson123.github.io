@@ -3,6 +3,7 @@ layout: default
 parent: Visual Studio
 title: Raspberry Pi Pico
 nav_order: 3
+has_children: true
 ---
 
 # Raspberry Pi Pico
