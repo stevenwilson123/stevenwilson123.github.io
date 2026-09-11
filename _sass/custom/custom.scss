@@ -4,3 +4,11 @@ summary.summary-highlight {
   color: #0000ff;
   font-weight: 600;
 }
+
+// Make nested nav categories (e.g. Raspberry Pi Pico under Visual Studio)
+// use the same color/weight as top-level nav categories.
+.nav-list .nav-list .nav-list-item:has(> .nav-list-expander) > .nav-list-link {
+  color: $body-text-color;
+  font-weight: 600;
+}
+
