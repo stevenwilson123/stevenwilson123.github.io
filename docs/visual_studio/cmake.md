@@ -30,7 +30,7 @@ Thre are a couple of different ways to configure CMake in Visual Studio.
 
 
 ## Basic CMakePresets.json Example
-Here is the default [CMakePresets.json](/assets/files/vs2026_default_cmakepresets.md) file that VS2026 spits out when you create a new CMake project.  It is located in the root of the project directory. 
+Here is the default [CMakePresets.json](/assets/files/vs2026_default_cmakepresets.json) file that VS2026 spits out when you create a new CMake project.  It is located in the root of the project directory. 
 
 
 This file allows you to switch between:

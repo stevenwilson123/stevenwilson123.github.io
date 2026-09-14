@@ -42,7 +42,7 @@ The latest ARM GCC toolchain can be downloaded from the official ARM website: ht
 >
 > You will need to select the appropriate version for your operating system and architecture (see image below)
 
-![](../../assets/images/gitlab_arm_gcc_download.png)
+![](/assets/images/gitlab_arm_gcc_download.png)
  
 
 <br>
@@ -61,7 +61,7 @@ Set up the following environment variables:
 ## Open the Pico SDK in VS2026
 Open the `pico-sdk` folder in VS2026.  You should see the following in the Solution Explorer:
 
-![](../../assets/images/vs2026_pico_sdk_folder_view.png)
+![](assets/images/vs2026_pico_sdk_folder_view.png)
 
 
 
@@ -75,7 +75,7 @@ Shortly after you open the `pico-sdk` folder in VS2026, it will try to configure
 To get around this, we need to add a `CMakePresets.json` file to the root of the `pico-sdk` folder.  
 This file will tell CMake to use the ARM GCC toolchain instead of the default MSVC compiler.
 
-Here is the link to the [CMakePresets.json](/assets/files/vs2026_rpi_pico_cmakepresets.md) file that I created for this purpose: 
+Here is the link to the [CMakePresets.json](/assets/files/vs2026_rpi_pico_cmakepresets.json) file that I created for this purpose: 
 
 There are a few things to note about this file:
 1. There are several hidden presets:
@@ -89,4 +89,4 @@ There are a few things to note about this file:
 
 This should result in you having the following in the `Configuration` pulldown in VS2026:
 
-![](../../assets/images/vs2026_pico_sdk_cmake_config_pulldown.png)
+![](/assets/images/vs2026_pico_sdk_cmake_config_pulldown.png)
