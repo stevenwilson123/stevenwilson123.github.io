@@ -35,7 +35,7 @@ Clone the github repo - https://github.com/raspberrypi/pico-sdk
 
 
 ## Download the GCC toolchain
-The latest ARM GCC toolchain can be downloaded from the official ARM website: https://gitlab.arm.com/tooling/gnu-toolchains-for-arm
+I'm using the latest ARM GCC toolchain, which can be downloaded from the official ARM [website](https://gitlab.arm.com/tooling/gnu-toolchains-for-arm)
 
 {: .note }
 > The actual download links are hidden behind a collapsible menu (which doesn't look clickable!)
@@ -44,6 +44,12 @@ The latest ARM GCC toolchain can be downloaded from the official ARM website: ht
 
 ![](/assets/images/gitlab_arm_gcc_download.png)
  
+
+{: .note }
+> If you are using the Pico 2, the RP2350 processor has BOTH dual ARM cores and dual RISC-V cores
+> so you can also use the RISC-V GCC toolchain.
+> NOTE - you can only use either the ARM cores OR the RISC-V cores, not both at the same time. 
+The latest RISC-V GCC toolchain can be downloaded from the official RISC-V website, or there is a pre-built binary available from the [pico-sdk-tools repo](https://github.com/raspberrypi/pico-sdk-tools/releases)
 
 <br>
 
