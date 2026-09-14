@@ -75,7 +75,7 @@ Shortly after you open the `pico-sdk` folder in VS2026, it will try to configure
 To get around this, we need to add a `CMakePresets.json` file to the root of the `pico-sdk` folder.  
 This file will tell CMake to use the ARM GCC toolchain instead of the default MSVC compiler.
 
-Here is the link to the [CMakePresets.json](../../assets/files/vs2026_rpi_pico_cmakepresets.md) file that I created for this purpose: 
+Here is the link to the [CMakePresets.json](/assets/files/vs2026_rpi_pico_cmakepresets.md) file that I created for this purpose: 
 
 There are a few things to note about this file:
 1. There are several hidden presets:
