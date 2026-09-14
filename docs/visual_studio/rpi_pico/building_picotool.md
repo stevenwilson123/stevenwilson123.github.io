@@ -7,12 +7,12 @@ nav_order: 1
 
 # Building Picotool
 
-Picotool is one of the little executables that the Pico SDK makes use.  
+Picotool is one of the little executables that the Pico SDK makes use of.  
 It is used to do signing/hashing of binaries produced during builds.
 Since it will be invoked as part of the SDK and/or application build, the executable has to available and ready to run.
 
 
-{: .important }
+{: .note }
 > If you don't want to build your own, a prebuilt verion of the Picotool executable can be downloaded from https://github.com/raspberrypi/pico-sdk-tools
 
 

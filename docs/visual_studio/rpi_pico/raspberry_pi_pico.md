@@ -8,13 +8,23 @@ nav_order: 2
 # Building the Raspberry Pi Pico SDK with VS2026
 
 ## Download and/or build the dependency binaries
+The Pico SDK requires a version of `picotool` to be available in your PATH.  
+You can either:
+* Download a pre-built binary from the [pico-sdk-tools repo](https://github.com/raspberrypi/pico-sdk-tools/releases)
+* Build it yourself from source - instructions are available [here](/docs/visual_studio/rpi_pico/picotool_build.md)
 
 
 
-## Download and build PICOTOOL
-TODO
-TODO
-TODO
+
+## Install 3rd party dependencies
+
+The Pico SDK also depends on some 3rd party libraries, which can be installed via **vcpkg**.  If you don't have vcpkg installed, you can follow the instructions [here](/docs/visual_studio/vcpkg.md)
+
+```
+vcpkg install python3
+```
+
+
 
 ## Download the Pico SDK
 Clone the github repo - https://github.com/raspberrypi/pico-sdk
@@ -22,6 +32,7 @@ Clone the github repo - https://github.com/raspberrypi/pico-sdk
 `git clone https://github.com/raspberrypi/pico-sdk.git`
 
 <br>
+
 
 ## Download the GCC toolchain
 The latest ARM GCC toolchain can be downloaded from the official ARM website: https://gitlab.arm.com/tooling/gnu-toolchains-for-arm
@@ -64,182 +75,7 @@ Shortly after you open the `pico-sdk` folder in VS2026, it will try to configure
 To get around this, we need to add a `CMakePresets.json` file to the root of the `pico-sdk` folder.  
 This file will tell CMake to use the ARM GCC toolchain instead of the default MSVC compiler.
 
-Here is the file:
-<details markdown="1">
-<summary class="summary-highlight">PICO SDK CMakePresets.json</summary>
-
-```json
-{
-    "version": 3,
-    "configurePresets": [
-        {
-            "name": "pico1_gcc_platform",
-            "hidden": true,
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "toolchainFile": "$env{PICO_SDK_PATH}/cmake/preload/toolchains/pico_arm_cortex_m0plus_gcc.cmake",
-            "cacheVariables": {
-                "PICO_PLATFORM": "rp2040"
-            }
-        },
-        {
-            "name": "pico1_clang_platform",
-            "hidden": true,
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "toolchainFile": "$env{PICO_SDK_PATH}/cmake/preload/toolchains/pico_arm_cortex_m0plus_clang.cmake",
-            "cacheVariables": {
-                "PICO_PLATFORM": "rp2040"
-            }
-        },
-        {
-            "name": "pico2_gcc_platform",
-            "hidden": true,
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "toolchainFile": "$env{PICO_SDK_PATH}/cmake/preload/toolchains/pico_arm_cortex_m33_gcc.cmake",
-            "cacheVariables": {
-                "PICO_PLATFORM": "rp2350"
-            }
-        },
-        {
-            "name": "pico2_clang_platform",
-            "hidden": true,
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "toolchainFile": "$env{PICO_SDK_PATH}/cmake/preload/toolchains/pico_arm_cortex_m33_clang.cmake",
-            "cacheVariables": {
-                "PICO_PLATFORM": "rp2350"
-            }
-        },
-        {
-            "name": "pico1_board",
-            "hidden": true,
-            "cacheVariables": {
-                "PICO_BOARD": "pico"
-            }
-        },
-        {
-            "name": "pico1w_board",
-            "hidden": true,
-            "cacheVariables": {
-                "PICO_BOARD": "pico_w"
-            }
-        },
-        {
-            "name": "pico2_board",
-            "hidden": true,
-            "cacheVariables": {
-                "PICO_BOARD": "pico2"
-            }
-        },
-        {
-            "name": "pico2w_board",
-            "hidden": true,
-            "cacheVariables": {
-                "PICO_BOARD": "pico2_w"
-            }
-        },
-
-        {
-            "name": "pico1_gcc_debug",
-            "displayName": "Pico1 GCC Debug",
-            "inherits": [
-                "pico1_gcc_platform",
-                "pico1_board"
-            ],
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
-            "name": "pico1_gcc_release",
-            "displayName": "Pico1 GCC Release",
-            "inherits": [
-                "pico1_gcc_platform",
-                "pico1_board"
-            ],
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
-            }
-        },
-        {
-            "name": "pico1w_gcc_debug",
-            "displayName": "Pico1W GCC Debug",
-            "inherits": [
-                "pico1_gcc_platform",
-                "pico1w_board"
-            ],
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
-            "name": "pico1w_gcc_release",
-            "displayName": "Pico1W GCC Release",
-            "inherits": [
-                "pico1_gcc_platform",
-                "pico1w_board"
-            ],
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
-            }
-        },
-
-        {
-            "name": "pico2_gcc_debug",
-            "displayName": "Pico2 GCC Debug",
-            "inherits": [
-                "pico2_gcc_platform",
-                "pico2_board"
-            ],
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
-            "name": "pico2_gcc_release",
-            "displayName": "Pico2 GCC Release",
-            "inherits": [
-                "pico2_gcc_platform",
-                "pico2_board"
-            ],
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
-            }
-        },
-        {
-            "name": "pico2w_gcc_debug",
-            "displayName": "Pico2W GCC Debug",
-            "inherits": [
-                "pico2_gcc_platform",
-                "pico2w_board"
-            ],
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
-        },
-        {
-            "name": "pico2w_gcc_release",
-            "displayName": "Pico2W GCC Release",
-            "inherits": [
-                "pico2_gcc_platform",
-                "pico2w_board"
-            ],
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
-            }
-        }
-    ]
-}
-```
-
-</details>
-
+Here is the link to the [CMakePresets.json](../../assets/files/vs2026_rpi_pico_cmakepresets.md) file that I created for this purpose: 
 
 There are a few things to note about this file:
 1. There are several hidden presets:
