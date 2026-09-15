@@ -59,14 +59,18 @@ Set up the following environment variables:
 | Variable			        | Value             | Example                                                           |
 |:--------------------------|:------------------|:------------------------------------------------------------------|
 | PICO_SDK_PATH             | path/to/pico-sdk  | C:\Users\Steven\source\repos\pico-sdk                             |
-| PICO_ARM_TOOLCHAIN_PATH   | path/to/toolchain | C:\tools\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi |
-| PICO_RISCV_TOOLCHAIN_PATH | path/to/toolchain | C:\tools\riscv_gcc_toolchain\12.3_rel1                            |
+| PICO_TOOLCHAIN_PATH       | path/to/toolchain | C:\tools\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi |
 
 {: .note }
 > You can choose one or both of the toolchains, depending on which processor cores you are targeting.
 > Remember - Pico 1 only supports the ARM cores, while Pico 2 supports both ARM and RISC-V cores.
 >
-> If you want to build **universal** binaries, you will need **both** the ARM and RISC-V toolchains
+> If you want to build **universal** binaries, you will need **both** the ARM and RISC-V toolchains, and you need seperate environvent variables:
+>
+> | Variable			      | Value             | Example                                                           |
+> |:--------------------------|:------------------|:------------------------------------------------------------------|
+> | PICO_ARM_TOOLCHAIN_PATH   | path/to/toolchain | C:\tools\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi |
+> | PICO_RISCV_TOOLCHAIN_PATH | path/to/toolchain | C:\tools\riscv_gcc_toolchain\12.3_rel1                            |
 
 <br>
 
