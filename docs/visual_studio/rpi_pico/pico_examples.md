@@ -55,7 +55,5 @@ Choose the correct preset from the **Configuration** pull-down menu in the toolb
 
 
 {: .warning }
-> During the build, you make see some warnings pop out regarding line length.  
-> This is due to the fact that the Pico SDK uses some long lines in its header files.  You can safely ignore these warnings, as they do not affect the build process.
->
-> You will need to select the appropriate version for your operating system and architecture (see image below)
+> During the build, you make see some warnings pop out regarding line length.  These are due to a Windows limitation around maximum path length
+
