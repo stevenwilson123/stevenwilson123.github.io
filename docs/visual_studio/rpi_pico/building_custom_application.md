@@ -37,23 +37,34 @@ pico_sdk_init()
 
 After that you can add your own source files and include directories, and then create the executable.  For example, if you have a single source file called `main.cpp`, you would add the following lines to the `CMakeLists.txt` file:
 ```cmake
-add_executable(test_app "main.cpp")
+add_executable(wifi_test "main.cpp")
 
 
 # pull in common dependencies
-target_link_libraries(test_app pico_stdlib) # for core functionality
+target_link_libraries(wifi_test pico_stdlib) # for core functionality
 
-target_link_options(test_app PUBLIC -Wl,-gc-sections,--print-memory-usage)
+target_link_options(wifi_test PUBLIC -Wl,-gc-sections,--print-memory-usage)
 
 
-pico_enable_stdio_usb(test_app 1)
-pico_enable_stdio_uart(test_app 0)
+pico_enable_stdio_usb(wifi_test 1)
+pico_enable_stdio_uart(wifi_test 0)
 
 # create map/bin/hex file etc.
-pico_add_extra_outputs(test_app)
+pico_add_extra_outputs(wifi_test)
 ```
 
-* We are linking `pico_stdlib`, which is a library that provides core functionality for the Pico, including access to the GPIO pins, UART, and other peripherals.
+
+## Linker options
+We are linking `pico_stdlib`, which is a library that provides core functionality for the Pico, including access to the GPIO pins, UART, and other peripherals.
+Depending on your application, you may need to link other libraries from the SDK as well.  See the Pico SDK documentation for more details.
+
+We are also adding some linker options to the executable, which will remove unused sections of code and print out a memory usage report after the build:
+
+![](assets/images/vs2026_rpi_pico_app_build_output.png)
+
+This is useful for showing just how much memory your application is using, and how much is left over for other things.
+
+
 
 
 ## STDIO
@@ -65,6 +76,8 @@ The most common is to use the USB port, which is what the `pico_enable_stdio_usb
 
 You can choose instead to use one of the onboard UART peripherals (conneted to pins on the edges of the Pico) by calling `pico_enable_stdio_uart()`.  
 Since the pins output TTL levels, you will need a USB-to-TTL adapter to connect the Pico to your PC.  You can also use a logic analyzer or oscilloscope to monitor the UART signals.
+
+
 
 ## MAP file
 To assist with debugging, I also call `pico_add_extra_outputs` which will create a `.map` file in the build output folder.  
