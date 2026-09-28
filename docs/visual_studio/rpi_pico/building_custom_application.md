@@ -60,7 +60,7 @@ Depending on your application, you may need to link other libraries from the SDK
 
 We are also adding some linker options to the executable, which will remove unused sections of code and print out a memory usage report after the build:
 
-![](assets/images/vs2026_rpi_pico_app_build_output.png)
+![](/assets/images/vs2026_rpi_pico_app_build_output.png)
 
 This is useful for showing just how much memory your application is using, and how much is left over for other things.
 

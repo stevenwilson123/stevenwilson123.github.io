@@ -77,7 +77,7 @@ Set up the following environment variables:
 ## Open the Pico SDK in VS2026
 Open the `pico-sdk` folder in VS2026.  You should see the following in the Solution Explorer:
 
-![](assets/images/vs2026_pico_sdk_folder_view.png)
+![](/assets/images/vs2026_pico_sdk_folder_view.png)
 
 
 
