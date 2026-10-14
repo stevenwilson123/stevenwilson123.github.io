@@ -24,9 +24,21 @@ If you take a look at your Pico, apart from all the pins along the edge, there a
 
 
 Raspberry Pi have an official debugger called the "Raspberry Pi Pico Debug Probe".  You can also use other SWD debuggers, such as the Segger J-Link.
-I bought a cheap clone of a CMSIS/DAP debugger off eBay for about $10, and it works perfectly well.
+I bought a cheap clone of a CMSIS/DAP debugger off eBay for about £5, and it works perfectly well.
 
 ![](/assets/images/rpi_pico_debug_box.png)
+
+The following is a diagram of the pinouts on the debug box:
+
+![](/assets/images/debug_adapter_pinouts.svg)
+
+At a minimum, you will need to connect the following pins:
+
+| Pico SWD | Debug Adapter | 
+|:---------|:--------------|
+| SWDIO    | TMS/IO        |
+| SWCLK    | TCK/CLK       |
+| GND      | GND           |
 
 
 
