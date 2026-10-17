@@ -153,7 +153,7 @@ When we start debugging in VS2026 (by pressing F5, or selecting "Start Debugging
 ![](/assets/images/vs2026_openocd_output.png)
 
 3. Connect GDB to OpenOCD:
-![](/assets/images/vs2026_gdb_loading_symbols.png)
+![](/assets/images/vs2026_connecting_gdb_to_openocd.png)
 
 4. Download the program to the Pico, reset it, and start running it:
 ![](/assets/images/vs2026_target_download.png)
@@ -167,6 +167,7 @@ When we start debugging in VS2026 (by pressing F5, or selecting "Start Debugging
 
 
 Once the program is running, you can pause execution, set breakpoints, step through the code, and inspect variables and memory just like you would in a normal desktop application:
+
 ![](/assets/images/vs2026_debugging_in_progress.png)
 
 
