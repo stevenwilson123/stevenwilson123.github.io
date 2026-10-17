@@ -73,7 +73,7 @@ This is done by adding a `launch.vs.json` file to the root of your project folde
 > The former is used by VS2026, while the latter is used by VSCode.  
 > Although they may have similar structures, they are NOT compatible with each other.
 
-An example of a `launch.vs.json` file is shown below (the full file is available here: [launch.vs.json](/assets/files/vs2026_rpi_pico_launch.json))
+An example of a `launch.vs.json` file is shown below (the full file is available here: [launch.vs.json](/assets/files/vs2026_rpi_pico_launch.vs.json))
 
 ```json
 {
