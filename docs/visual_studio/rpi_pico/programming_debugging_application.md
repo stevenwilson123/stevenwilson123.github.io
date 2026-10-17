@@ -144,5 +144,34 @@ These commands instructt GDB to download the program to the Pico, reset it, and 
 
 
 
+## Start Debugging
+When we start debugging in VS2026 (by pressing F5, or selecting "Start Debugging" from the menu), it will begin the following sequence of events:
+1. Load the debug symbols from the ELF file into GDB:
+![](/assets/images/vs2026_gdb_loading_symbols.png)
+
+2. Launch OpenOCD, which will connect to the debug adapter and the Pico.  It does this as a background process, but you can see the output in the "Debug Console" window:
+![](/assets/images/vs2026_openocd_output.png)
+
+3. Connect GDB to OpenOCD:
+![](/assets/images/vs2026_gdb_loading_symbols.png)
+
+4. Download the program to the Pico, reset it, and start running it:
+![](/assets/images/vs2026_target_download.png)
+
+5. Reset the Pico and start running the program:
+![](/assets/images/vs2026_gdb_monitor_reset.png)
+
+{: .note }
+> The whole process takes about a minute or so, depending on how fast your debug adapter is, how big your ELF file is, etc.
+
+
+
+Once the program is running, you can pause execution, set breakpoints, step through the code, and inspect variables and memory just like you would in a normal desktop application:
+![](/assets/images/vs2026_debugging_in_progress.png)
+
+
+
+
+
 
 
