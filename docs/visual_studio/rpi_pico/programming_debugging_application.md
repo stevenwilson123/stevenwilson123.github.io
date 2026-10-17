@@ -48,9 +48,10 @@ VS2026 doesn't know how to directly talk to the debug adapter and/or the RPi Pic
 OpenOCD is an open-source tool that can talk to a variety of debug adapters and microcontrollers, including the RPi Pico.
 
 The official OpenOCD website is here: [http://openocd.org/](http://openocd.org/)
+
 Its github repo is here: [https://github.com/openocd-org/openocd](https://github.com/openocd-org/openocd)
 
-OpenOCD is also available as part of the RPi Pico tools https://github.com/raspberrypi/pico-sdk-tools/releases
+OpenOCD is also available as part of the RPi Pico tools [https://github.com/raspberrypi/pico-sdk-tools/releases](https://github.com/raspberrypi/pico-sdk-tools/releases)
 
 When it is run, OpenOCD presents a GDB-like interface on port 3333 (by default).  You can then connect to this interface using a GDB client.
 We will be using the version of GDB that came with the ARM GCC toolchain that we installed earlier.  This is called `arm-none-eabi-gdb.exe` and it is located in the `bin` folder of your ARM GCC installation.
@@ -60,5 +61,88 @@ VS2026 know how to talk to GDB, so we can use it to control the Pico via OpenOCD
 Here is a digram showing how all the pieces fit together:
 
 ![](/assets/images/debugging_block_diagram.svg)
+
+
+## Launch Configuration (launch.vs.json)
+The final piece of the puzzle is to tell VS2026 how to talk to GDB, and by extension OpenOCD and the Pico.  
+This is done by creating a "launch configuration" in VS2026.  
+This is done by adding a `launch.vs.json` file to the root of your project folder.
+
+{: .note }
+> Please note the difference between `launch.vs.json` and `launch.json`.  
+> The former is used by VS2026, while the latter is used by VSCode.  
+> Although they may have similar structures, they are NOT compatible with each other.
+
+An example of a `launch.vs.json` file is shown below (the full file is available here: [launch.vs.json](/assets/files/vs2026_rpi_pico_launch.json))
+
+```json
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "cppgdb",
+      "project": "CMakeLists.txt",
+      "projectTarget": "wifi_test.elf (src\\main\\wifi_test.elf)",
+      "name": "wifi_test.elf (OpenOCD)",
+      "program": "${cmake.binaryDir}/src/main/wifi_test.elf",
+      "isDefaultConfiguration": true,
+      "MIMode": "gdb",
+      "miDebuggerPath": "arm-none-eabi-gdb.exe",
+      "miDebuggerServerAddress": "localhost:3333",
+      "useExtendedRemote": true,
+      "debugServerPath": "openocd.exe",
+      "debugServerArgs": "-d2 -f interface/cmsis-dap.cfg -f target/${cmake.OPENOCD_TARGET}.cfg -c \"adapter speed 5000\" ",
+      "serverLaunchTimeout": 5000,
+      "filterStderr": true,
+      "svdPath": "${env.PICO_SDK_PATH}/src/${cmake.OPENOCD_TARGET}/hardware_regs/${cmake.OPENOCD_TARGET}.svd",
+      "showDevDebugOutput": "raw",
+      "postRemoteConnectCommands": [
+        {
+          "text": "-target-download",
+          "ignoreFailures": false
+        },
+        {
+          "text": "-interpreter-exec console \"monitor reset init\"",
+          "ignoreFailures": false
+        },
+        {
+          "text": "-interpreter-exec console \"continue\"",
+          "ignoreFailures": false
+        }
+      ]
+    }
+  ]
+}
+```
+
+There is a lot going on in this file, so let's break it down into its component parts 
+
+{: .note }
+> A full description of the launch.vs.json file format can be found here: [https://learn.microsoft.com/en-us/cpp/build/launch-vs-schema-reference-cpp?view=msvc-170](https://learn.microsoft.com/en-us/cpp/build/launch-vs-schema-reference-cpp?view=msvc-170))
+
+
+In order to load debug symbols, we need to tell VS2026 where the ELF file is located.  
+This is done with the `program` property.  
+In this case, the ELF file is located in the `src/main` folder of the build output directory, and is called `wifi_test.elf`.
+I make use of the `${cmake.binaryDir}` variable to refer to the build output directory, which is set by CMake.
+
+The `miDebuggerPath` property tells VS2026 where to find the GDB executable.  
+In this case, it is located in the `bin` folder of the ARM GCC toolchain, which we have already added to our PATH environment variable.
+
+The `miDebuggerServerAddress` property tells VS2026 where to find the OpenOCD server.
+
+The `debugServerPath` property tells VS2026 where to find the OpenOCD executable (we also have this added to our PATH environment variable).
+
+The `debugServerArgs` property tells VS2026 what arguments to pass to OpenOCD when it is launched.
+The main thing to note here are the two `-f` arguments.  These contain the configuration files that tell OpenOCD how to talk to the debug adapter (the `interface/cmsis-dap.cfg` file), and how talk to the target (the `target/${cmake.OPENOCD_TARGET}.cfg` file).
+The files that are passed to OpenOCD are located in its `share\openocd\scripts` folder.
+The `${cmake.OPENOCD_TARGET}` variable is set in my [CMakePresets.json](/assets/files/vs2026_rpi_pico_cmakepresets.json) file, and is set to `rp2040` for the Pico 1, and `rp2350` for the Pico 2.
+
+The `postRemoteConnectCommands` property contains a list of commands that are sent to GDB after it connects to OpenOCD.
+These commands instructt GDB to download the program to the Pico, reset it, and then start running it.
+
+
+
 
 

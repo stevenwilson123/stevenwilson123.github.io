@@ -1,0 +1,50 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "cppgdb",
+      "project": "CMakeLists.txt",
+      "projectTarget": "wifi_test.elf (src\\main\\wifi_test.elf)",
+      "name": "wifi_test.elf (OpenOCD)",
+      "program": "${cmake.binaryDir}/src/main/wifi_test.elf",
+      "isDefaultConfiguration": true,
+      "MIMode": "gdb",
+      "miDebuggerPath": "arm-none-eabi-gdb.exe",
+      "miDebuggerServerAddress": "localhost:3333",
+      "useExtendedRemote": true,
+      "debugServerPath": "openocd.exe",
+      "debugServerArgs": "-d2 -f interface/cmsis-dap.cfg -f target/${cmake.OPENOCD_TARGET}.cfg -c \"adapter speed 5000\" ",
+      "serverLaunchTimeout": 5000,
+      "filterStderr": true,
+      "svdPath": "${env.PICO_SDK_PATH}/src/${cmake.OPENOCD_TARGET}/hardware_regs/${cmake.OPENOCD_TARGET}.svd",
+      "showDevDebugOutput": "raw",
+      "postRemoteConnectCommands": [
+        {
+          "text": "-target-download",
+          "ignoreFailures": false
+        },
+        {
+          "text": "-interpreter-exec console \"monitor reset init\"",
+          "ignoreFailures": false
+        },
+        {
+          "text": "-interpreter-exec console \"continue\"",
+          "ignoreFailures": false
+        }
+      ]
+    },
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "wifi_test.elf (src\\main\\wifi_test.elf)",
+      "name": "wifi_test.elf (src\\main\\wifi_test.elf)"
+    },
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "bs2_default.elf (pico-sdk\\src\\rp2350\\boot_stage2\\bs2_default.elf)",
+      "name": "bs2_default.elf (pico-sdk\\src\\rp2350\\boot_stage2\\bs2_default.elf)"
+    }
+  ]
+}
