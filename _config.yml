@@ -1,8 +1,8 @@
-title: Just the Docs Template
-description: A starter template for a Jeykll site using the Just the Docs theme!
+title: My Notebook/Blog Site
+description: Just a simple notebook/blog site built with Jekyll and the Just the Docs theme.
 theme: just-the-docs
 
-url: https://just-the-docs.github.io
+url: https://stevenwilson123.github.io/
 
 # Ensure consistent navigation ordering
 nav_sort: case_insensitive
